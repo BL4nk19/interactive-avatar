@@ -1,0 +1,29 @@
+---
+description: Interactive Avatar project using MediaPipe hand gesture recognition
+globs: 
+alwaysApply: true
+---
+
+Interactive Avatar project using MediaPipe hand gesture recognition.
+
+CURRENT TECH STACK:
+- React 18+ with TypeScript (Vite setup)
+- @mediapipe/tasks-vision for gesture recognition
+- Tailwind CSS + Framer Motion
+- Canvas API for real-time processing
+
+PROJECT GOAL:
+Build storefront avatar that:
+- Detects customer gestures via webcam
+- Responds with character animations  
+- Shows idle states when no person detected
+- Positive gestures → friendly responses
+- Rude gestures → defensive reactions
+
+ARCHITECTURE:
+- components/avatar/ (avatar system)
+- components/camera/ (webcam handling)
+- hooks/ (React hooks for MediaPipe)
+- types/ (TypeScript definitions)
+
+Focus on modular, scalable code that can be extended with AI-generated animations later.
