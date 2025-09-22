@@ -112,19 +112,50 @@ export default class Recognizer {
 	private async init(): Promise<void> {
 		this.recognizer = await GestureRecognizer.createFromOptions(this.vision, this.options);
 
-		if (this.videoElement.duration) {
-			const updateResults = async () => {
-				if (this.recognizer) {
-					this.results = await this.recognizer.recognizeForVideo(this.videoElement, Date.now());
+		// Wait for video element to be ready
+		const waitForVideoReady = (): Promise<void> => {
+			return new Promise((resolve) => {
+				const checkVideo = () => {
+					if (this.videoElement.readyState >= 2) { // HAVE_CURRENT_DATA
+						resolve();
+					} else {
+						setTimeout(checkVideo, 100);
+					}
+				};
+				checkVideo();
+			});
+		};
+
+		await waitForVideoReady();
+
+		// Start the recognition loop
+		const updateResults = async () => {
+			if (this.recognizer && this.videoElement.readyState >= 2) {
+				try {
+					// Use the correct API for video recognition
+					// For video mode, we need to pass the video element and timestamp
+					this.results = await this.recognizer.recognizeForVideo(this.videoElement, performance.now());
+					
+					// Debug logging
+					if (this.results && (this.results.landmarks?.length > 0 || this.results.gestures?.length > 0)) {
+						console.log("Gesture detection results:", {
+							landmarks: this.results.landmarks?.length || 0,
+							gestures: this.results.gestures?.length || 0,
+							gestureNames: this.results.gestures?.map(g => g[0]?.categoryName).filter(Boolean) || []
+						});
+					}
+					
 					if (this.resultsCallback) {
 						this.resultsCallback(this.results);
 					}
+				} catch (error) {
+					console.error("Gesture recognition error:", error);
 				}
-				requestAnimationFrame(updateResults);
-			};
+			}
+			requestAnimationFrame(updateResults);
+		};
 
-			updateResults();
-		}
+		updateResults();
 	}
 
 	/**
@@ -133,5 +164,36 @@ export default class Recognizer {
 	 */
 	onResults(callback: (results: GestureRecognizerResult | null) => void): void {
 		this.resultsCallback = callback;
+	}
+
+	/**
+	 * Manually trigger recognition for testing purposes.
+	 * @returns A Promise that resolves to the recognition results.
+	 */
+	async recognize(): Promise<GestureRecognizerResult | null> {
+		if (!this.recognizer || this.videoElement.readyState < 2) {
+			console.warn("Recognizer not ready or video not ready");
+			return null;
+		}
+
+		try {
+			const results = await this.recognizer.recognizeForVideo(this.videoElement, performance.now());
+			this.results = results;
+			if (this.resultsCallback) {
+				this.resultsCallback(results);
+			}
+			return results;
+		} catch (error) {
+			console.error("Manual recognition error:", error);
+			return null;
+		}
+	}
+
+	/**
+	 * Get the current recognition results.
+	 * @returns The current recognition results or null if no results available.
+	 */
+	getResults(): GestureRecognizerResult | null {
+		return this.results;
 	}
 }

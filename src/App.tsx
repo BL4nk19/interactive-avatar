@@ -23,6 +23,19 @@ function App() {
 
 	const emojiLabel = results?.gestures[0]?.[0].categoryName ?? "None";
 
+	// Debug logging
+	useEffect(() => {
+		console.log("App state:", {
+			isMediaStreamReady,
+			hasVideoRef: !!videoRef.current,
+			hasRecognizer: !!recognizerRef.current,
+			hasResults: !!results,
+			landmarksCount: results?.landmarks?.length || 0,
+			gesturesCount: results?.gestures?.length || 0,
+			emojiLabel
+		});
+	}, [isMediaStreamReady, videoRef.current, recognizerRef.current, results, emojiLabel]);
+
 	const onUserMediaError = (error: string | DOMException) => {
 		setIsMediaStreamReady(false);
 		console.error("Error getting user media", error);
