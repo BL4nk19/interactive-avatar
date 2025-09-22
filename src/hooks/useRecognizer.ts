@@ -24,7 +24,7 @@ export default function useRecognizer() {
 		try {
 			// Early return if a Recognizer instance already exists or video element is not available
 			if (!videoRef.current || recognizerRef.current) return;
-			
+
 			// Wait for video element to be ready
 			const waitForVideo = () => {
 				return new Promise<HTMLVideoElement>((resolve) => {
@@ -41,7 +41,7 @@ export default function useRecognizer() {
 
 			const videoElement = await waitForVideo();
 			console.log("Video element ready, initializing recognizer...");
-			
+
 			const recognizer = await Recognizer.create({
 				videoElement: videoElement,
 			});
@@ -51,7 +51,7 @@ export default function useRecognizer() {
 				console.log("Gesture recognition results:", results);
 				setResults(results);
 			});
-			
+
 			console.log("Recognizer initialized successfully");
 		} catch (error) {
 			console.error("Failed to initialize Recognizer:", error);

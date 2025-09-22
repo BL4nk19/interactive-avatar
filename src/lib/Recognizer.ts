@@ -116,7 +116,8 @@ export default class Recognizer {
 		const waitForVideoReady = (): Promise<void> => {
 			return new Promise((resolve) => {
 				const checkVideo = () => {
-					if (this.videoElement.readyState >= 2) { // HAVE_CURRENT_DATA
+					if (this.videoElement.readyState >= 2) {
+						// HAVE_CURRENT_DATA
 						resolve();
 					} else {
 						setTimeout(checkVideo, 100);
@@ -135,16 +136,16 @@ export default class Recognizer {
 					// Use the correct API for video recognition
 					// For video mode, we need to pass the video element and timestamp
 					this.results = await this.recognizer.recognizeForVideo(this.videoElement, performance.now());
-					
+
 					// Debug logging
 					if (this.results && (this.results.landmarks?.length > 0 || this.results.gestures?.length > 0)) {
 						console.log("Gesture detection results:", {
 							landmarks: this.results.landmarks?.length || 0,
 							gestures: this.results.gestures?.length || 0,
-							gestureNames: this.results.gestures?.map(g => g[0]?.categoryName).filter(Boolean) || []
+							gestureNames: this.results.gestures?.map((g) => g[0]?.categoryName).filter(Boolean) || [],
 						});
 					}
-					
+
 					if (this.resultsCallback) {
 						this.resultsCallback(this.results);
 					}

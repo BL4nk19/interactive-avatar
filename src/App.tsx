@@ -32,7 +32,7 @@ function App() {
 			hasResults: !!results,
 			landmarksCount: results?.landmarks?.length || 0,
 			gesturesCount: results?.gestures?.length || 0,
-			emojiLabel
+			emojiLabel,
 		});
 	}, [isMediaStreamReady, videoRef.current, recognizerRef.current, results, emojiLabel]);
 
