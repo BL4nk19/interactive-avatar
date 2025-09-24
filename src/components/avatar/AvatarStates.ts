@@ -36,9 +36,9 @@ export const GESTURE_RESPONSES: Record<GestureType, GestureResponse> = {
 	Pointing_Up: {
 		state: 'active',
 		mood: 'excited',
-		animation: 'pointAcknowledge',
-		duration: 1800,
-		message: 'I see you! 👆'
+		animation: 'hearts',
+		duration: 3000,
+		message: 'We love you Andre! 💕💕💕'
 	},
 	Victory: {
 		state: 'active',
@@ -47,12 +47,26 @@ export const GESTURE_RESPONSES: Record<GestureType, GestureResponse> = {
 		duration: 2200,
 		message: 'Victory! ✌️'
 	},
+	OK: {
+		state: 'active',
+		mood: 'excited',
+		animation: 'hearts',
+		duration: 3000,
+		message: 'We love you Andre! 💕💕💕'
+	},
+	ILoveYou: {
+		state: 'active',
+		mood: 'excited',
+		animation: 'hearts',
+		duration: 3000,
+		message: 'I love you too! 🤟💕'
+	},
 	None: {
 		state: 'idle',
 		mood: 'bored',
 		animation: 'idle',
 		duration: 1000,
-		message: 'Waiting for gestures...'
+		message: 'Show me a gesture! 👋'
 	}
 };
 
@@ -76,7 +90,8 @@ export const ACTIVE_ANIMATIONS = [
 	'thumbsUp',
 	'victory',
 	'pointAcknowledge',
-	'excited'
+	'excited',
+	'hearts'
 ] as const;
 
 /**
@@ -111,7 +126,7 @@ export function getRandomIdleAnimation(): string {
  * Check if gesture is positive/friendly
  */
 export function isPositiveGesture(gestureType: GestureType): boolean {
-	const positiveGestures: GestureType[] = ['Thumb_Up', 'Open_Palm', 'Pointing_Up', 'Victory'];
+	const positiveGestures: GestureType[] = ['Thumb_Up', 'Open_Palm', 'Pointing_Up', 'Victory', 'ILoveYou'];
 	return positiveGestures.includes(gestureType);
 }
 

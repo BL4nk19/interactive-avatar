@@ -46,11 +46,11 @@ export default function Avatar({ gestureType, isPersonDetected, className = '' }
 	const currentMood: AvatarMood = response.mood;
 
 	return (
-		<div className={`flex flex-col items-center justify-center p-8 ${className}`}>
+		<div className={`flex flex-col items-center justify-center p-4 w-full h-full ${className}`}>
 			{/* Avatar Character */}
 			<motion.div
 				className={`
-					relative w-32 h-32 rounded-full flex items-center justify-center text-6xl
+					relative w-40 h-40 rounded-full flex items-center justify-center text-8xl
 					${getStateBackground(currentState)}
 					shadow-lg border-4 border-white
 					transition-all duration-300
@@ -126,25 +126,11 @@ export default function Avatar({ gestureType, isPersonDetected, className = '' }
 					{isPersonDetected ? (
 						<span className="text-green-600">👤 Person detected</span>
 					) : (
-						<span className="text-gray-500">🔍 Looking for gestures...</span>
+						<span className="text-gray-500">💤 Sleeping...</span>
 					)}
 				</motion.div>
 			</motion.div>
 
-			{/* Animation Debug Info (only in development) */}
-			{process.env.NODE_ENV === 'development' && (
-				<motion.div
-					className="mt-4 text-xs text-gray-400 bg-gray-100 px-3 py-2 rounded"
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ delay: 0.7 }}
-				>
-					<div>State: {currentState}</div>
-					<div>Mood: {currentMood}</div>
-					<div>Animation: {currentAnimation}</div>
-					<div>Gesture: {gestureType}</div>
-				</motion.div>
-			)}
 		</div>
 	);
 }
