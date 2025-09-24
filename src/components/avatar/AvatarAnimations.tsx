@@ -111,6 +111,17 @@ export const avatarVariants: AnimationVariants = {
 		}
 	},
 
+	hearts: {
+		scale: [1, 1.3, 1.1, 1.3, 1],
+		rotate: [0, 10, -10, 5, -5, 0],
+		transition: {
+			duration: 3,
+			ease: 'easeInOut',
+			repeat: 2,
+			repeatType: 'reverse'
+		}
+	},
+
 	// Defensive animations
 	defensive: {
 		scale: [1, 0.95, 1],

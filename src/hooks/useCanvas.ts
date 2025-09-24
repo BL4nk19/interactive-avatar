@@ -34,23 +34,25 @@ export default function useCanvas(landmarksArray?: NormalizedLandmark[][]) {
 				console.log("Drawing landmarks:", landmarks.length, "hands detected");
 				for (const landmark of landmarks) {
 					if (landmark && landmark.length > 0) {
-						// Draw hand connections
+						// Draw hand connections with increased line width
 						drawingUtils.drawConnectors(landmark, GestureRecognizer.HAND_CONNECTIONS, {
 							color: "#12B886",
-							lineWidth: 2,
+							lineWidth: 3, // Increased from 2
 						});
 						// Draw landmarks with larger radius
 						drawingUtils.drawLandmarks(landmark, {
 							color: "#12B886",
-							radius: 4,
+							radius: 5, // Increased from 4
 						});
 						// Draw landmarks with smaller radius for detail
 						drawingUtils.drawLandmarks(landmark, {
 							color: "#94D82D",
-							radius: 2,
+							radius: 3, // Increased from 2
 						});
 					}
 				}
+			} else {
+				console.log("No landmarks to draw");
 			}
 		},
 		[drawingUtils],

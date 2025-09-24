@@ -11,6 +11,8 @@ export type GestureType =
 	| 'Open_Palm'
 	| 'Pointing_Up'
 	| 'Victory'
+	| 'OK'
+	| 'ILoveYou'
 	| 'None';
 
 export type AvatarMood = 'happy' | 'neutral' | 'sad' | 'excited' | 'defensive' | 'bored';
