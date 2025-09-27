@@ -1,14 +1,10 @@
-import {
-	FileTextIcon,
-	GlobeIcon,
-	InputIcon,
-} from "@radix-ui/react-icons";
+import { Video, BrainCircuit, ScrollText, Bot, Logs } from "lucide-react";
 import { useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
 import Webcam from "react-webcam";
 import useCanvas from "./hooks/useCanvas";
 import useRecognizer from "./hooks/useRecognizer";
-import Avatar from "./components/avatar/Avatar";
+import VideoAvatar from "./components/avatar/VideoAvatar";
 import type { GestureType } from "./types/avatar";
 
 
@@ -74,7 +70,7 @@ function App() {
 							{/* Header */}
 							<div className="absolute top-0 left-0 right-0 p-6 pb-2 z-20">
 								<div className="flex items-center gap-3 mb-2">
-									<InputIcon className="h-6 w-6 text-gray-700" />
+									<Video className="h-6 w-6 text-gray-700" />
 									<h3 className="text-lg font-semibold text-gray-900">Gesture Camera</h3>
 								</div>
 								<p className="text-sm text-gray-600">Webcam feed with hand gesture detection overlay</p>
@@ -127,13 +123,13 @@ function App() {
 					<div className="lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-4">
 						<div className="h-full bg-white rounded-xl border border-gray-200/50 shadow-lg p-6 flex flex-col overflow-hidden">
 							<div className="flex items-center gap-3 mb-4">
-								<FileTextIcon className="h-6 w-6 text-gray-700" />
+								<Bot className="h-6 w-6 text-gray-700" />
 								<h3 className="text-lg font-semibold text-gray-900">Interactive Avatar</h3>
 							</div>
 							<p className="text-sm text-gray-600 mb-6">Your AI avatar responds to hand gestures in real-time</p>
 							<div className="flex-1 flex items-center justify-center relative p-4">
-								<div className="w-full max-w-sm relative">
-									<Avatar
+								<div className="w-full max-w-sm relative" style={{ aspectRatio: '9/16' }}>
+									<VideoAvatar
 										gestureType={gestureType}
 										isPersonDetected={!!isPersonDetected}
 										className="w-full h-full"
@@ -147,7 +143,7 @@ function App() {
 					<div className="lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4">
 						<div className="h-full bg-white rounded-xl border border-gray-200/50 shadow-lg p-6 flex flex-col">
 							<div className="flex items-center gap-3 mb-3">
-								<GlobeIcon className="h-6 w-6 text-gray-700" />
+								<BrainCircuit className="h-6 w-6 text-gray-700" />
 								<h3 className="text-lg font-semibold text-gray-900">Gesture Status</h3>
 							</div>
 							<p className="text-sm text-gray-600 mb-6">Current gesture detection and feedback</p>
@@ -186,7 +182,7 @@ function App() {
 					<div className="lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2">
 						<div className="h-full bg-white rounded-xl border border-gray-200/50 shadow-lg p-6 flex flex-col">
 							<div className="flex items-center gap-3 mb-4">
-								<FileTextIcon className="h-6 w-6 text-gray-700" />
+								<ScrollText className="h-6 w-6 text-gray-700" />
 								<h3 className="text-lg font-semibold text-gray-900">Notice Board</h3>
 							</div>
 							<p className="text-sm text-gray-600">Upcoming events and announcements</p>
@@ -197,7 +193,7 @@ function App() {
 					<div className="lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-4">
 						<div className="h-full bg-white rounded-xl border border-gray-200/50 shadow-lg p-6 flex flex-col">
 							<div className="flex items-center gap-3 mb-4">
-								<GlobeIcon className="h-6 w-6 text-gray-700" />
+								<Logs className="h-6 w-6 text-gray-700" />
 								<h3 className="text-lg font-semibold text-gray-900">Log</h3>
 							</div>
 							<p className="text-sm text-gray-600 mb-6">Avatar status and system information</p>
